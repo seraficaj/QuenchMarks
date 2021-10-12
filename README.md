@@ -10,4 +10,7 @@ QuenchMarks is a web app that allows you to keep track of your water intake, and
 - Postgres
 - Flask
 
+## Todos
+- Build out app
+- Deploy to Heroku
 
