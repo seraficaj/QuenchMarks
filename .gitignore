@@ -1,1 +1,4 @@
 myenv
+migrations
+__pycache__
+data.sqlite
