@@ -43,20 +43,27 @@
                 <div class="navbar-end">
                     <div class="navbar-item">
                         <div class="buttons">
-                            <a href="{{url_for('users.register')}}" class="button is-primary">
+                            <a
+                                href="{{url_for('users.register')}}"
+                                class="button is-primary"
+                            >
                                 <strong>Sign up</strong>
                             </a>
-                            <a href="{{url_for('users.login')}}" class="button is-light"> Log in </a>
+                            <a
+                                href="{{url_for('users.login')}}"
+                                class="button is-light"
+                            >
+                                Log in
+                            </a>
                         </div>
                     </div>
                 </div>
             </div>
         </nav>
-        {% block content %}
         <div class="content">
-            <div class="columns"></div>
+            <div class="columns">{% block content %}</div>
+            {% endblock %}
         </div>
-        {% endblock %}
         <script src="{{ url_for('static', filename='js/app.js') }}"></script>
     </body>
 </html>
