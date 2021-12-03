@@ -35,3 +35,10 @@ class Bottle(db.Model):
     material = db.Column(db.String(64), nullable=False)
     name = db.Column(db.String(64), nullable=False)
     volume = db.Column(db.Integer)
+
+
+class Review(db.Model):
+    id = db.Column(db.Integer, primary_key=True)
+    text = db.Column(db.Text, nullable=False)
+    bottle_id = db.Column(db.Integer, db.ForeignKey("bottle.id"), nullable=False)
+    author = db.Column(db.Integer, db.ForeignKey("user.id"), nullable=False)
