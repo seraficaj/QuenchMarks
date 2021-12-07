@@ -1,3 +1,4 @@
+from datetime import datetime
 from QuenchMarks import db, login_manager
 from werkzeug.security import generate_password_hash, check_password_hash
 from flask_login import UserMixin
@@ -35,10 +36,12 @@ class Bottle(db.Model):
     material = db.Column(db.String(64), nullable=False)
     name = db.Column(db.String(64), nullable=False)
     volume = db.Column(db.Integer)
+    reviews = db.relationship('Review', backref='bottle', lazy=True)
 
 
 class Review(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     text = db.Column(db.Text, nullable=False)
+    published = db.Column(db.DateTime, nullable=False, default=datetime.utcnow)
     bottle_id = db.Column(db.Integer, db.ForeignKey("bottle.id"), nullable=False)
     author = db.Column(db.Integer, db.ForeignKey("user.id"), nullable=False)
