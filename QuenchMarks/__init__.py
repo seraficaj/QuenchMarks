@@ -26,6 +26,7 @@ login_manager.login_view = "users.login"
 
 from QuenchMarks.core.views import core
 from QuenchMarks.users.views import users
+from QuenchMarks.bottles.views import bottles
 from QuenchMarks.error_pages.handlers import error_pages
 
 app.register_blueprint(core)

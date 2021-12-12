@@ -6,5 +6,5 @@ from wtforms.validators import DataRequired
 class BottlePostForm(FlaskForm):
     name = StringField("Name", validators=[DataRequired()])
     brand = StringField("Brand", validators=[DataRequired()])
-    material = StringField("Text", validators=[DataRequired()])
+    material = StringField("Material", validators=[DataRequired()])
     submit = SubmitField("Post")
