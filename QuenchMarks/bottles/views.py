@@ -12,11 +12,12 @@ def create_post():
     form = BottlePostForm()
 
     if form.validate_on_submit():
+        print(form)
         new_bottle = Bottle(
-            name=form.data.name,
-            brand=form.data.brand,
-            material=form.data.material,
-            volume=form.data.volume
+            name=form.name.data,
+            brand=form.brand.data,
+            material=form.material.data,
+            volume=form.volume.data
         )
         db.session.add(new_bottle)
         db.session.commit()
