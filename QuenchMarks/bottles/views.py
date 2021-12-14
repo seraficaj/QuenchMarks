@@ -9,11 +9,14 @@ bottles = Blueprint("bottles", __name__)
 @bottles.route("/create", methods=["GET", "POST"])
 @login_required
 def create_post():
-    form = Bottle()
+    form = BottlePostForm()
 
     if form.validate_on_submit():
         new_bottle = Bottle(
-            
+            name=form.data.name,
+            brand=form.data.brand,
+            material=form.data.material,
+            volume=form.data.volume
         )
         db.session.add(new_bottle)
         db.session.commit()
