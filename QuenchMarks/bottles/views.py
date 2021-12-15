@@ -10,7 +10,7 @@ bottles = Blueprint("bottles", __name__)
 def index():
     bottles = Bottle.query.order_by(Bottle.name.asc()).all()
     print(bottles)
-    return render_template("bottle_index.html")
+    return render_template("bottles/bottle_index.html", bottles=bottles)
 
 @bottles.route("/bottles/create", methods=["GET", "POST"])
 @login_required
@@ -29,4 +29,4 @@ def create_post():
         db.session.commit()
         flash("Bottle Created")
         return redirect(url_for("core.index"))
-    return render_template("create_bottle.html", form=form)
+    return render_template("bottles/create_bottle.html", form=form)
