@@ -7,5 +7,5 @@ class BottlePostForm(FlaskForm):
     name = StringField("Name", validators=[DataRequired()])
     brand = StringField("Brand", validators=[DataRequired()])
     material = StringField("Material", validators=[DataRequired()])
-    volume = StringField("Volume (ml)", validators=[DataRequired()])
+    volume = StringField("Volume (Liters)", validators=[DataRequired()])
     submit = SubmitField("Post")
