@@ -6,11 +6,17 @@ from QuenchMarks.bottles.forms import BottlePostForm
 
 bottles = Blueprint("bottles", __name__)
 
-@bottles.route("/bottles/index")
+@bottles.route("/bottles/")
 def index():
     bottles = Bottle.query.order_by(Bottle.name.asc()).all()
     print(bottles)
     return render_template("bottles/bottle_index.html", bottles=bottles)
+
+@bottles.route("/bottles/<id>")
+def bottle_detail(id):
+    bottle = Bottle.query.filter_by(id=id).first_or_404()
+    return render_template('bottles/bottle_detail.html', bottle=bottle)
+    
 
 @bottles.route("/bottles/create", methods=["GET", "POST"])
 @login_required
