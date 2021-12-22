@@ -1,10 +1,27 @@
 {% extends "base.html" %} {% block content %}
 <div class="column">
     <h1>All Bottles!</h1>
-    <ul>
-    {% for bottle in bottles %}
-    <li>{{ bottle.name }} - {{bottle.id}}</li>
-    {% endfor %}
-    </ul>
+    <table class="table is-narrow is-striped">
+        <thead>
+            <tr>
+                <th>Bottle Name</th>
+                <th>Brand</th>
+                <th>Material</th>
+                <th>Volume (mL)</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for bottle in bottles %}
+            <tr>
+            <td>{{bottle.name}}</td>
+            <td>{{bottle.brand}}</td>
+            <td>{{bottle.material}}</td>
+            <td>{{bottle.volume}}</td>
+            <td><a href="#"><span class="tag is-link">Edit</span></a></td>
+            <td><a href="#"><span class="tag is-danger">Delete</span><a></td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
 </div>
 {% endblock %}
