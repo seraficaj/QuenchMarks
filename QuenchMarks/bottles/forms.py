@@ -9,3 +9,10 @@ class BottlePostForm(FlaskForm):
     material = StringField("Material", validators=[DataRequired()])
     volume = StringField("Volume (mL)", validators=[DataRequired()])
     submit = SubmitField("Post")
+
+class BottleUpdateForm(FlaskForm):
+    name = StringField("Name", validators=[DataRequired()])
+    brand = StringField("Brand", validators=[DataRequired()])
+    material = StringField("Material", validators=[DataRequired()])
+    volume = StringField("Volume (mL)", validators=[DataRequired()])
+    submit = SubmitField("Update Info")
