@@ -19,7 +19,7 @@ def bottle_detail(id):
     
 
 @bottles.route("/bottles/create", methods=["GET", "POST"])
-@login_required
+# @login_required
 def create_bottle():
     form = BottlePostForm()
 
@@ -39,8 +39,15 @@ def create_bottle():
 
 
 @bottles.route("/bottles/<id>/update", methods=["GET", "POST"])
-@login_required
+# @login_required
 def update_bottle(id):
-    form = BottleUpdateForm()
-    bottle = Bottle.query.filter_by(id=id).first_or_404()
-    return render_template('bottles/edit_bottle.html', form=form, bottle=bottle)
+    updateForm = BottleUpdateForm()
+    bottle = Bottle.query.get_or_404(id)
+    if updateForm.validate_on_submit():
+        bottle.name=updateForm.name.data
+        bottle.brand=updateForm.brand.data
+        bottle.material=updateForm.material.data
+        bottle.volume=updateForm.volume.data
+        db.session.commit()
+        return redirect(url_for('bottles.index'))
+    return render_template('bottles/edit_bottle.html', form=updateForm, bottle=bottle)
