@@ -51,3 +51,12 @@ def update_bottle(id):
         db.session.commit()
         return redirect(url_for('bottles.index'))
     return render_template('bottles/edit_bottle.html', form=updateForm, bottle=bottle)
+
+    
+@bottles.route("/bottles/<id>/delete", methods=["GET", "POST"])
+# @login_required
+def delete_bottle(id):
+    bottle = Bottle.query.get_or_404(id)
+    db.session.delete(bottle)
+    db.session.commit()
+    return redirect(url_for("bottles.index"))
