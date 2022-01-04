@@ -40,6 +40,7 @@ class Bottle(db.Model):
 class Review(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     text = db.Column(db.Text, nullable=False)
+    rating = db.Column(db.Integer, nullable=False)
     published = db.Column(db.DateTime, nullable=False, default=datetime.utcnow)
     bottle_id = db.Column(db.Integer, db.ForeignKey("bottle.id"), nullable=False)
     author = db.Column(db.Integer, db.ForeignKey("user.id"), nullable=False)
