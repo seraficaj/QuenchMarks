@@ -1,5 +1,19 @@
 {% extends "base.html" %} {% block content %}
 <div class="column">
-    <h1>{{bottle.name}}</h1>
+    <h1>Bottle Profile: {{bottle.name}}</h1>
+    <table class="is-table">
+        <tr>
+            <td>Brand:</td>
+            <td>{{bottle.brand}}</td>
+        </tr>
+        <tr>
+            <td>Material:</td>
+            <td>{{bottle.material}}</td>
+        </tr>
+        <tr>
+            <td>Capacity:</td>
+            <td>{{bottle.volume / 1000}} L</td>
+        </tr>
+    </table>
 </div>
 {% endblock %}

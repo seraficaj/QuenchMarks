@@ -8,7 +8,7 @@
                 <th>Bottle Name</th>
                 <th>Brand</th>
                 <th>Material</th>
-                <th>Volume (mL)</th>
+                <th>Volume (L)</th>
             </tr>
         </thead>
         <tbody>
@@ -17,7 +17,7 @@
             <td>{{bottle.name}}</td>
             <td>{{bottle.brand}}</td>
             <td>{{bottle.material}}</td>
-            <td>{{bottle.volume}}</td>
+            <td>{{bottle.volume / 1000}}</td>
             <td><a href="{{url_for('bottles.update_bottle', id=bottle.id)}}"><span class="tag is-link">Edit</span></a></td>
             <td><a href="{{url_for('bottles.delete_bottle', id=bottle.id)}}"><span class="tag is-danger">Delete</span><a></td>
             </tr>
