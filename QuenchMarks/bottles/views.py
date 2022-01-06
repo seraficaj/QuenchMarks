@@ -6,18 +6,21 @@ from QuenchMarks.bottles.forms import BottlePostForm, BottleUpdateForm
 
 bottles = Blueprint("bottles", __name__)
 
+# INDEX BOTTLES
 @bottles.route("/bottles/")
 def index():
     bottles = Bottle.query.order_by(Bottle.name.asc()).all()
     print(bottles)
     return render_template("bottles/bottle_index.html", bottles=bottles)
 
-@bottles.route("/bottles/<id>")
+@bottles.route("/bottles/<int:id>")
 def bottle_detail(id):
     bottle = Bottle.query.filter_by(id=id).first_or_404()
     return render_template('bottles/bottle_detail.html', bottle=bottle)
     
+# CRUD FOR BOTTLES
 
+# CREATE A BOTTLE
 @bottles.route("/bottles/create", methods=["GET", "POST"])
 @login_required
 def create_bottle():
@@ -37,8 +40,8 @@ def create_bottle():
         return redirect(url_for("bottles.index"))
     return render_template("bottles/create_bottle.html", form=form)
 
-
-@bottles.route("/bottles/<id>/update", methods=["GET", "POST"])
+# UPDATE A BOTTLE INFO
+@bottles.route("/bottles/<int:id>/update", methods=["GET", "POST"])
 @login_required
 def update_bottle(id):
     updateForm = BottleUpdateForm()
@@ -53,7 +56,8 @@ def update_bottle(id):
     return render_template('bottles/edit_bottle.html', form=updateForm, bottle=bottle)
 
     
-@bottles.route("/bottles/<id>/delete", methods=["GET", "POST"])
+# DELETE A BOTTLE
+@bottles.route("/bottles/<int:id>/delete", methods=["GET", "POST"])
 # @login_required
 def delete_bottle(id):
     bottle = Bottle.query.get_or_404(id)
