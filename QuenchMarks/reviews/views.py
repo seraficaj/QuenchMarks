@@ -9,12 +9,6 @@ reviews = Blueprint("reviews", __name__)
 
 # DEBUGGING = SEE ALL REVIEWS
 
-@reviews.route("/reviews", methods=["GET"])
-def all_review():
-    reviews = Review.query.order_by(Review.rating.asc()).all()
-    print(reviews)
-    return redirect(url_for("bottles.index"))
-
 # CREATE A REVIEW
 @reviews.route("/bottles/<int:id>/addreview", methods=["GET", "POST"])
 @login_required
@@ -33,7 +27,21 @@ def create_review(id):
         db.session.commit()
         flash("Review Created")
         return redirect(url_for("bottles.index"))
-    return render_template("reviews/add_review.html", form=form)
+    return render_template("reviews/input_review.html", form=form)
 
+# UPDATE A REVIEW
+@reviews.route("/updatereview/<int:id>", methods=["GET", "POST"])
+@login_required
+def update_review(id):
 
+    review = Review.query.get_or_404(id)
+    form = ReviewForm()
+
+    if form.validate_on_submit():
+        review.rating = form.rating.data
+        review.text = form.text.data
+        db.session.commit()
+        flash("Review Created")
+        return redirect(url_for("bottles.index"))
+    return render_template("reviews/input_review.html", form=form)
 # DELETE A REVIEW

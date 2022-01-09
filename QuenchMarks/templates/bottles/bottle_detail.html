@@ -19,5 +19,6 @@
     <ul>
         {% for review in reviews %} <li>Rating: {{review.rating}} - Text: {{review.text}} - {{review.user.username}}</li> {% endfor %}
     </ul>
+    <a href="{{url_for('reviews.create_review', id=bottle.id)}}"><button class="button is-primary">add a review</button></a>
 </div>
 {% endblock %}
