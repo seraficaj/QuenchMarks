@@ -1,7 +1,7 @@
 from flask import render_template, url_for, request, redirect, flash, Blueprint
 from flask_login import current_user, login_required
 from QuenchMarks import db
-from QuenchMarks.models import Bottle
+from QuenchMarks.models import Bottle, Review
 from QuenchMarks.bottles.forms import BottlePostForm, BottleUpdateForm
 
 bottles = Blueprint("bottles", __name__)
@@ -16,7 +16,8 @@ def index():
 @bottles.route("/bottles/<int:id>")
 def bottle_detail(id):
     bottle = Bottle.query.filter_by(id=id).first_or_404()
-    return render_template('bottles/bottle_detail.html', bottle=bottle)
+    reviews = Review.query.filter_by(bottle_id=id)
+    return render_template('bottles/bottle_detail.html', bottle=bottle, reviews=reviews)
     
 # CRUD FOR BOTTLES
 

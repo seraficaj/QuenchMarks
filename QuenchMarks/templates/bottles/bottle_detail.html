@@ -16,5 +16,8 @@
         </tr>
     </table>
     <h2>Reviews</h2>
+    <ul>
+        {% for review in reviews %} <li>Rating: {{review.rating}} - Text: {{review.text}} - {{review.user.username}}</li> {% endfor %}
+    </ul>
 </div>
 {% endblock %}
