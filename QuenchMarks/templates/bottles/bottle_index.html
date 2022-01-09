@@ -14,7 +14,7 @@
         <tbody>
             {% for bottle in bottles %}
             <tr>
-            <td>{{bottle.name}}</td>
+                <td> <a href="{{url_for('bottles.bottle_detail', id=bottle.id)}}">{{bottle.name}}</a></td>
             <td>{{bottle.brand}}</td>
             <td>{{bottle.material}}</td>
             <td>{{bottle.volume / 1000}}</td>

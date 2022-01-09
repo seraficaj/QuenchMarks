@@ -34,7 +34,7 @@ class Bottle(db.Model):
     brand = db.Column(db.String(64), nullable=False)
     material = db.Column(db.String(64), nullable=False)
     volume = db.Column(db.Integer)
-    reviews = db.relationship('Review', backref='bottle', lazy=True)
+    reviews = db.relationship('Review', cascade="all,delete", backref='bottle', lazy=True)
 
 
 class Review(db.Model):
