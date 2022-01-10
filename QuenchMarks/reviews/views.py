@@ -1,4 +1,4 @@
-from flask import render_template, url_for, request, redirect, flash, Blueprint
+from flask import abort, render_template, url_for, request, redirect, flash, Blueprint
 from flask_login import current_user, login_required
 from werkzeug import datastructures
 from QuenchMarks import db
@@ -37,6 +37,9 @@ def update_review(id):
     review = Review.query.get_or_404(id)
     form = ReviewForm()
 
+    if current_user.id != review.author.id:
+        abort(403)
+
     if form.validate_on_submit():
         review.rating = form.rating.data
         review.text = form.text.data
@@ -44,4 +47,16 @@ def update_review(id):
         flash("Review Created")
         return redirect(url_for("bottles.index"))
     return render_template("reviews/input_review.html", form=form)
+
 # DELETE A REVIEW
+@reviews.route("/deletereview/<int:id>", methods=["GET", "POST"])
+@login_required
+def delete_review(id):
+    review = Review.query.get_or_404(id)
+    bottle_id = review.bottle_id
+    if current_user.id == review.author:
+        db.session.delete(review)
+        db.session.commit()
+    else:
+        abort(403)
+    return redirect(url_for("bottles.detail", id=bottle_id))

@@ -59,7 +59,7 @@ def update_bottle(id):
     
 # DELETE A BOTTLE
 @bottles.route("/bottles/<int:id>/delete", methods=["GET", "POST"])
-# @login_required
+@login_required
 def delete_bottle(id):
     bottle = Bottle.query.get_or_404(id)
     db.session.delete(bottle)
