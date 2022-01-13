@@ -26,3 +26,9 @@ QuenchMarks is a web app that allows you to leave reviews of your favorite water
     - delete bottle's info [x]
     - leave a review for each bottle [x]
     - select my favorite bottles and display them on my user profile page 
+
+## Run this command to have hot reloading on:
+
+```
+FLASK_APP=app.py FLASK_ENV=development flask run  
+```
