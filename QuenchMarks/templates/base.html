@@ -8,14 +8,17 @@
             rel="stylesheet"
             href="{{ url_for('static', filename='css/bulma.css') }}"
         />
+        <link
+        rel="stylesheet"
+        href="{{ url_for('static', filename='css/styles.css') }}"
+    />
+        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@5.15.4/css/fontawesome.min.css" integrity="sha384-jLKHWM3JRmfMU0A5x5AkjWkw/EYfGUAGagvnfryNV3F9VqM98XiIH7VBGVoxVSc7" crossorigin="anonymous" />
         <title>QuenchMarks</title>
     </head>
     <body>
         <nav class="navbar" role="navigation" aria-label="main navigation">
             <div class="navbar-brand">
-                <a class="navbar-item" href="">
-                    QuenchMarks
-                </a>
+                <a class="navbar-item" href=""> QuenchMarks </a>
 
                 <a
                     role="button"
@@ -32,14 +35,18 @@
 
             <div id="navbarBasicExample" class="navbar-menu">
                 <div class="navbar-start">
-                    <a class="navbar-item" href="{{url_for('core.index')}}"> Home </a>
-                    <a class="navbar-item" href="{{url_for('bottles.index')}}"> All Bottles </a>
+                    <a class="navbar-item" href="{{url_for('core.index')}}">
+                        Home
+                    </a>
+                    <a class="navbar-item" href="{{url_for('bottles.index')}}">
+                        All Bottles
+                    </a>
                 </div>
 
                 <div class="navbar-end">
                     <div class="navbar-item">
                         <div class="buttons">
-                            {% if current_user.is_authenticated %} 
+                            {% if current_user.is_authenticated %}
                             <a
                                 href="{{url_for('users.logout')}}"
                                 class="button is-primary"
@@ -65,10 +72,8 @@
                 </div>
             </div>
         </nav>
-        <div class="content">
-            <div class="columns">{% block content %}</div>
-            {% endblock %}
-        </div>
+        <div>{% block content %}</div>
+        {% endblock %}
         <script src="{{ url_for('static', filename='js/app.js') }}"></script>
     </body>
 </html>
