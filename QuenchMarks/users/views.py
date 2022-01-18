@@ -1,7 +1,7 @@
 from flask import render_template,url_for,flash,redirect,request,Blueprint
 from flask_login import login_user, current_user, logout_user, login_required
 from QuenchMarks import db
-from QuenchMarks.models import User, user_favorites
+from QuenchMarks.models import User, Bottle, user_favorites
 from QuenchMarks.users.forms import RegistrationForm,LoginForm,UpdateUserForm
 
 users = Blueprint('users',__name__)
@@ -81,9 +81,21 @@ def user_profile(username):
     return render_template('user_profile.html',user=user)
 
 # favorite a bottle
-@users.route("/<username>/add_fave/<bottle_id>", methods=['POST'])
+@users.route("/<username>/add_fave/<int:bottle_id>", methods=['GET','POST'])
 @login_required
 def add_fave(username, bottle_id):
     user = User.query.filter_by(username=username).first_or_404()
-    user.favorites.append(bottle_id)
-    return redirect(url_for('users.account'))
+    user.favorites.append(Bottle.query.get(bottle_id))
+    db.session.commit()
+    print(user.favorites)
+    return redirect(url_for('users.user_profile',username=current_user.username))
+
+# UNfavorite a bottle
+@users.route("/<username>/remove_fave/<int:bottle_id>", methods=['GET','POST'])
+@login_required
+def remove_fave(username, bottle_id):
+    user = User.query.filter_by(username=username).first_or_404()
+    user.favorites.remove(Bottle.query.get(bottle_id))
+    db.session.commit()
+    print(user.favorites)
+    return redirect(url_for('users.user_profile',username=current_user.username))

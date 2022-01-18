@@ -1,9 +1,20 @@
-
 {% extends "base.html" %} {% block content %}
-<h1>{{user.username}}</h1>
-<ul>
-    {% for review in user.reviews %}
-    <li>{{review.rating}} stars - {{review.text}} - for Bottle {{review.bottle.name}}</li>
-    {% endfor %}
-</ul>
+<div class="content">
+    <h1>{{user.username}}</h1>
+    <h2>Reviews by this user:</h2>
+    <ul>
+        {% for review in user.reviews %}
+        <li>
+            {{review.rating}} stars - {{review.text}} - for Bottle
+            {{review.bottle.name}}
+        </li>
+        {% endfor %}
+    </ul>
+    <h2>{{user.username}}'s Favorite Bottles</h2>
+    <ul>
+        {% for bottle in user.favorites %}
+        <li>{{bottle.name}}</li>
+        {% endfor %}
+    </ul>
+</div>
 {% endblock %}
