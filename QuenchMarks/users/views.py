@@ -81,21 +81,20 @@ def user_profile(username):
     return render_template('user_profile.html',user=user)
 
 # favorite a bottle
-@users.route("/<username>/add_fave/<int:bottle_id>", methods=['GET','POST'])
+@users.route("/<int:user_id>/add_fave/<int:bottle_id>", methods=['GET','POST'])
 @login_required
-def add_fave(username, bottle_id):
-    user = User.query.filter_by(username=username).first_or_404()
+def add_fave(user_id, bottle_id):
+    user = User.query.filter_by(id=user_id).first_or_404()
     user.favorites.append(Bottle.query.get(bottle_id))
     db.session.commit()
     print(user.favorites)
-    return redirect(url_for('users.user_profile',username=current_user.username))
+    return redirect(url_for('bottles.bottle_detail', id=bottle_id))
 
 # UNfavorite a bottle
-@users.route("/<username>/remove_fave/<int:bottle_id>", methods=['GET','POST'])
+@users.route("/<int:user_id>/remove_fave/<int:bottle_id>", methods=['GET','POST'])
 @login_required
-def remove_fave(username, bottle_id):
-    user = User.query.filter_by(username=username).first_or_404()
+def remove_fave(user_id, bottle_id):
+    user = User.query.filter_by(id=user_id).first_or_404()
     user.favorites.remove(Bottle.query.get(bottle_id))
     db.session.commit()
-    print(user.favorites)
-    return redirect(url_for('users.user_profile',username=current_user.username))
+    return redirect(url_for('bottles.bottle_detail', id=bottle_id))

@@ -20,5 +20,11 @@
         {% for review in reviews %} <li>Rating: {{review.rating}} - Text: {{review.text}} - {{review.user.username}}</li> {% endfor %}
     </ul>
     <a href="{{url_for('reviews.create_review', id=bottle.id)}}"><button class="button is-primary">add a review</button></a>
+    {% if bottle in current_user.favorites %}
+    <a href="{{url_for('users.remove_fave', user_id=current_user.id, bottle_id=bottle.id)}}"><button class="button is-warning">Unfavorite this bottle</button></a>
+    {% else %}
+    <a href="{{url_for('users.add_fave', user_id=current_user.id, bottle_id=bottle.id)}}"><button class="button is-info">Favorite this bottle</button></a>
+    {% endif %}
+
 </div>
 {% endblock %}
