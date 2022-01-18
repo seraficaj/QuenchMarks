@@ -1,7 +1,7 @@
 from flask import render_template,url_for,flash,redirect,request,Blueprint
 from flask_login import login_user, current_user, logout_user, login_required
 from QuenchMarks import db
-from QuenchMarks.models import User
+from QuenchMarks.models import User, user_favorites
 from QuenchMarks.users.forms import RegistrationForm,LoginForm,UpdateUserForm
 
 users = Blueprint('users',__name__)
@@ -77,6 +77,13 @@ def account():
 
 @users.route("/<username>")
 def user_profile(username):
-    page = request.args.get('page',1,type=int)
     user = User.query.filter_by(username=username).first_or_404()
     return render_template('user_profile.html',user=user)
+
+# favorite a bottle
+@users.route("/<username>/add_fave/<bottle_id>", methods=['POST'])
+@login_required
+def add_fave(username, bottle_id):
+    user = User.query.filter_by(username=username).first_or_404()
+    user.favorites.append(bottle_id)
+    return redirect(url_for('users.account'))

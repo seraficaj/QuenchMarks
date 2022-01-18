@@ -1,5 +1,9 @@
 
 {% extends "base.html" %} {% block content %}
-
-
+<h1>{{user.username}}</h1>
+<ul>
+    {% for review in user.reviews %}
+    <li>{{review.rating}} stars - {{review.text}} - for Bottle {{review.bottle.name}}</li>
+    {% endfor %}
+</ul>
 {% endblock %}

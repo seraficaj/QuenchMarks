@@ -29,6 +29,6 @@ QuenchMarks is a web app that allows you to leave reviews of your favorite water
 
 ## Run this command to have hot reloading on:
 
-```
+```py
 FLASK_APP=app.py FLASK_ENV=development flask run  
 ```
