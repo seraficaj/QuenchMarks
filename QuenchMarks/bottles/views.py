@@ -1,3 +1,4 @@
+from cgitb import text
 from flask import render_template, url_for, request, redirect, flash, Blueprint
 from flask_login import current_user, login_required
 from QuenchMarks import db
