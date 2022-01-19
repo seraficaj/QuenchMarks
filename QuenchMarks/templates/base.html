@@ -41,6 +41,11 @@
                     <a class="navbar-item" href="{{url_for('bottles.index')}}">
                         All Bottles
                     </a>
+                    {% if current_user.is_authenticated %}
+                    <a class="navbar-item" href="{{url_for('users.user_profile', username=current_user.username)}}">
+                        My Profile
+                    </a>
+                    {% endif %}
                 </div>
 
                 <div class="navbar-end">
