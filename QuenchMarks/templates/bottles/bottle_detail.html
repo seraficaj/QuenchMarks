@@ -30,16 +30,18 @@
     <a href="{{url_for('reviews.create_review', id=bottle.id)}}"
         ><button class="button is-primary">add a review</button></a
     >
-    {% if bottle in current_user.favorites %}
-    <a
-        href="{{url_for('users.remove_fave', user_id=current_user.id, bottle_id=bottle.id)}}"
-        ><button class="button is-warning">Unfavorite this bottle</button></a
-    >
-    {% else %}
-    <a
-        href="{{url_for('users.add_fave', user_id=current_user.id, bottle_id=bottle.id)}}"
-        ><button class="button is-info">Favorite this bottle</button></a
-    >
+    {% if current_user.is_authenticated %}
+        {% if bottle in current_user.favorites %}
+        <a
+            href="{{url_for('users.remove_fave', user_id=current_user.id, bottle_id=bottle.id)}}"
+            ><button class="button is-warning">Unfavorite this bottle</button></a
+        >
+        {% else %}
+        <a
+            href="{{url_for('users.add_fave', user_id=current_user.id, bottle_id=bottle.id)}}"
+            ><button class="button is-info">Favorite this bottle</button></a
+        >
+        {% endif %}
     {% endif %}
 </div>
 {% endblock %}
