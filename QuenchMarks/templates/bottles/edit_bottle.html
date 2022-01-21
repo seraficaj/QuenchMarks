@@ -4,22 +4,22 @@
   <form method="POST">
     {{form.hidden_tag()}}
     <div>
-      {{form.name.label}}
-      {{form.name}}
+      {{form.name.label(class="label")}}
+      {{form.name(class="input")}}
     </div>
     <div>
-      {{form.brand.label}}
-      {{form.brand}}
+      {{form.brand.label(class="label")}}
+      {{form.brand(class="input")}}
     </div>
     <div>
-        {{form.material.label}}
-        {{form.material}}
+        {{form.material.label(class="label")}}
+        {{form.material(class="input")}}
     </div>
     <div>
-      {{form.volume.label}}
-      {{form.volume}}
+      {{form.volume.label(class="label")}}
+      {{form.volume(class="input")}}
   </div>
-    <div>{{form.submit}}</div>
+    <div>{{form.submit(class="button is-primary")}}</div>
   </form>
 </div>
 {% endblock %}
