@@ -26,7 +26,7 @@ def create_review(id):
         db.session.add(review)
         db.session.commit()
         flash("Review Created")
-        return redirect(url_for("bottles.index"))
+        return redirect(url_for("bottles.bottle_detail", id=id))
     return render_template("reviews/input_review.html", form=form)
 
 # UPDATE A REVIEW

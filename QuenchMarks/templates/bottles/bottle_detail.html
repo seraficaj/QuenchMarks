@@ -1,5 +1,5 @@
 {% extends "base.html" %} {% block content %}
-<div class="column">
+<div class="content">
     <h1>Bottle Profile: {{bottle.name}}</h1>
     <table class="is-table">
         <tr>
@@ -16,32 +16,29 @@
         </tr>
     </table>
     <h2>Reviews</h2>
-    <ul>
-        {% for review in reviews %}
-        <li>
-            Rating: {{review.rating}} - Text: {{review.text}} -
-            <a
-                href="{{url_for('users.user_profile', username=review.user.username)}}"
-                >{{review.user.username}}</a
-            >
-        </li>
-        {% endfor %}
-    </ul>
-    <a href="{{url_for('reviews.create_review', id=bottle.id)}}"
-        ><button class="button is-primary">add a review</button></a
-    >
+    {% for review in reviews %}
+    <div class="card column is-one-third">
+        <div class="card-content">
+            <p class="title is-4 has-text-centered">Rating: {{review.rating}} Stars</p>
+        </div>
+        <div class="content">
+            <p>{{review.text}}</p>
+            <br>
+            <a href="{{url_for('users.user_profile', username=review.user.username)}}">{{review.user.username}}</a>
+        </div>
+    </div>
+    {% endfor %}
+    <hr>
+    <a href="{{url_for('reviews.create_review', id=bottle.id)}}"><button class="button is-primary">add a
+            review</button></a>
     {% if current_user.is_authenticated %}
-        {% if bottle in current_user.favorites %}
-        <a
-            href="{{url_for('users.remove_fave', user_id=current_user.id, bottle_id=bottle.id)}}"
-            ><button class="button is-warning">Unfavorite this bottle</button></a
-        >
-        {% else %}
-        <a
-            href="{{url_for('users.add_fave', user_id=current_user.id, bottle_id=bottle.id)}}"
-            ><button class="button is-info">Favorite this bottle</button></a
-        >
-        {% endif %}
+    {% if bottle in current_user.favorites %}
+    <a href="{{url_for('users.remove_fave', user_id=current_user.id, bottle_id=bottle.id)}}"><button
+            class="button is-warning">Unfavorite this bottle</button></a>
+    {% else %}
+    <a href="{{url_for('users.add_fave', user_id=current_user.id, bottle_id=bottle.id)}}"><button
+            class="button is-info">Favorite this bottle</button></a>
+    {% endif %}
     {% endif %}
 </div>
 {% endblock %}
