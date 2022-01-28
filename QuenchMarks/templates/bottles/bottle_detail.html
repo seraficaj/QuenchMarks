@@ -24,7 +24,12 @@
         <div class="content">
             <p>{{review.text}}</p>
             <br>
-            <a href="{{url_for('users.user_profile', username=review.user.username)}}">{{review.user.username}}</a>
+            <div class="card-footer">
+            <a class="card-footer-item button is-link" href="{{url_for('users.user_profile', username=review.user.username)}}">{{review.user.username}}</a>
+            {% if current_user.username == review.user.username %}
+            <a class="card-footer-item button is-danger" href="{{url_for('reviews.delete_review', id=review.id)}}">delete</a>
+            {% endif %}
+            </div>
         </div>
     </div>
     {% endfor %}

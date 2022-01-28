@@ -59,4 +59,4 @@ def delete_review(id):
         db.session.commit()
     else:
         abort(403)
-    return redirect(url_for("bottles.detail", id=bottle_id))
+    return redirect(url_for("bottles.bottle_detail", id=bottle_id))
