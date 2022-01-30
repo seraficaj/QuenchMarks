@@ -5,34 +5,49 @@
     <div class="container">
         <div class="columns is-multiline">
             {% for review in user.reviews %}
-            <div class="card column is-one-third">
-                <div class="card-content">
-                    <p class="title is-4 has-text-centered">
-                        Rating: {{review.rating}} Stars
-                    </p>
-                </div>
-                <div class="content">
-                    <p>{{review.text}}</p>
-                    <br />
-                    <time>Review published: {{review.published.date()}}</time>
-                    <div class="card-footer">
-                        <a
-                            class="card-footer-item"
-                            href="{{url_for('bottles.bottle_detail', id=review.bottle.id)}}"
-                            >{{review.bottle.name}}</a
+            <div class="column is-one-third">
+                <div class="card">
+                    <div class="card-content">
+                        <p class="title is-4 has-text-centered">
+                            Rating: {{review.rating}} Stars
+                        </p>
+                    </div>
+                    <div class="content">
+                        <p>{{review.text}}</p>
+                        <br />
+                        <time
+                            >Review published: {{review.published.date()}}</time
                         >
-                        {% if current_user.username == review.user.username %}
-                        <a
-                            class="card-footer-item has-text-danger"
-                            href="{{url_for('reviews.delete_review', id=review.id)}}"
-                            >delete</a
-                        >
-                        {% endif %}
+                        <div class="card-footer">
+                            <a
+                                class="card-footer-item"
+                                href="{{url_for('bottles.bottle_detail', id=review.bottle.id)}}"
+                                >For: {{review.bottle.name}}</a
+                            >
+                            {% if current_user.username == review.user.username
+                            %}
+                            <a
+                                class="card-footer-item has-text-danger"
+                                href="{{url_for('reviews.delete_review', id=review.id)}}"
+                                >delete</a
+                            >
+                            {% endif %}
+                        </div>
                     </div>
                 </div>
             </div>
             {% endfor %}
         </div>
     </div>
+    <h2>{{user.username}}'s Favorite Bottles</h2>
+    <ul>
+        {% for bottle in user.favorites %}
+        <li>
+            <a href="{{url_for('bottles.bottle_detail', id=bottle.id)}}"
+                >{{bottle.name}}</a
+            >
+        </li>
+        {% endfor %}
+    </ul>
 </div>
 {% endblock %}

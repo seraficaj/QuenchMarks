@@ -1,11 +1,11 @@
 {% extends 'base.html' %} {% block content%}
-<div class="column">
+<div class="column is-half">
     <h1>Add Review</h1>
     <form method="POST">
         {{form.hidden_tag()}}
-        <div>{{form.rating.label}} {{form.rating}}</div>
-        <div>{{form.text.label}} {{form.text}}</div>
-        <div>{{form.submit}}</div>
+        <div>{{form.rating.label(class="label")}} {{form.rating(class="input")}}</div>
+        <div>{{form.text.label(class="label")}} {{form.text(class="input")}}</div>
+        <div>{{form.submit(class="button is-primary")}}</div>
     </form>
 </div>
 </div>
