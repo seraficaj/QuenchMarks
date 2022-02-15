@@ -1,4 +1,3 @@
-from msilib.schema import Environment
 import os 
 from flask import Flask, render_template, request
 from flask_sqlalchemy import SQLAlchemy
