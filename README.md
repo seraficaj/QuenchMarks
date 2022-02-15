@@ -12,10 +12,11 @@ QuenchMarks is a web app that allows you to leave reviews of your favorite water
 - Flask
 
 ## Todos
-- Build out app
-- Reach MVP (Minimally Viable Product)
-- Style App responsively with Bulma.css
-- Deploy to Heroku
+- Build out app [x]
+- Reach MVP (Minimally Viable Product) [x]
+- Style App responsively with Bulma.css [x]
+- Switch database to Postgres from SQLite [x]
+- Deploy to Heroku [ ]
 
 ## User Stories
 - As a user I can:
