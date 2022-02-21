@@ -17,8 +17,9 @@ password: testing123
 - HTML/CSS/JavaScript
     - Jinja2 Templating Engine
 - Python3
-- SQLAlchemy
-- Flask
+- Postgresql Database
+- SQLAlchemy ORM
+- Flask Framework to encapsulate all the above
 
 ## Todos
 - Build out app [x]
