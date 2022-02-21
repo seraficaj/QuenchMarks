@@ -2,7 +2,16 @@
 
 ## About This Project
 
-QuenchMarks is a web app that allows you to leave reviews of your favorite water bottles and track your daily hydration. 
+QuenchMarks is a web app that allows you to leave reviews of your favorite water bottles.
+You can also favorite your bottles and view reviews by other users.
+
+This project is deployed at: https://quenchmarks.herokuapp.com.
+
+You can log on and test features using this account:
+```
+username: demomode@test.com
+password: testing123
+```
 
 ## Technologies Used
 - HTML/CSS/JavaScript
@@ -16,7 +25,7 @@ QuenchMarks is a web app that allows you to leave reviews of your favorite water
 - Reach MVP (Minimally Viable Product) [x]
 - Style App responsively with Bulma.css [x]
 - Switch database to Postgres from SQLite [x]
-- Deploy to Heroku [ ]
+- Deploy to Heroku [x]
 
 ## User Stories
 - As a user I can:
