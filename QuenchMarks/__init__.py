@@ -10,7 +10,7 @@ app.config['SECRET_KEY'] = 'topsecretlol'
 
 ### Database Setup
 basedir = os.path.abspath(os.path.dirname(__file__))
-app.config["SQLALCHEMY_DATABASE_URI"] = "postgres:///quenchmarks"
+app.config["SQLALCHEMY_DATABASE_URI"] = "postgresql:///quenchmarks"
 app.config["SQLALCHEMY_TRACK_MODIFICATIONS"] = False
 
 db = SQLAlchemy(app)
