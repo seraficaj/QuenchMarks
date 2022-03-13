@@ -11,7 +11,6 @@ bottles = Blueprint("bottles", __name__)
 @bottles.route("/bottles/")
 def index():
     bottles = Bottle.query.order_by(Bottle.name.asc()).all()
-    print(bottles)
     return render_template("bottles/bottle_index.html", bottles=bottles)
 
 @bottles.route("/bottles/<int:id>")
