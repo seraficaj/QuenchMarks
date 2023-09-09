@@ -52,8 +52,15 @@ def create_bottle():
 @bottles.route("/bottles/<int:id>/update", methods=["GET", "POST"])
 @login_required
 def update_bottle(id):
-    updateForm = BottleUpdateForm()
+    # get bottle
     bottle = Bottle.query.get_or_404(id)
+    # pre-populate edit form
+    updateForm = BottleUpdateForm()
+    updateForm.name.data = bottle.name
+    updateForm.brand.data = bottle.brand
+    updateForm.material.data = bottle.material
+    updateForm.volume.data = bottle.volume
+
     if updateForm.validate_on_submit():
         bottle.name = updateForm.name.data
         bottle.brand = updateForm.brand.data
