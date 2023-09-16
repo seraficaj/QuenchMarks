@@ -54,19 +54,22 @@ def create_bottle():
 def update_bottle(id):
     # get bottle
     bottle = Bottle.query.get_or_404(id)
-    # pre-populate edit form
-    updateForm = BottleUpdateForm()
-    updateForm.name.data = bottle.name
-    updateForm.brand.data = bottle.brand
-    updateForm.material.data = bottle.material
-    updateForm.volume.data = bottle.volume
+    if current_user.username == bottle.posted_by:
+        # pre-populate edit form
+        updateForm = BottleUpdateForm()
+        updateForm.name.data = bottle.name
+        updateForm.brand.data = bottle.brand
+        updateForm.material.data = bottle.material
+        updateForm.volume.data = bottle.volume
 
-    if updateForm.validate_on_submit():
-        bottle.name = updateForm.name.data
-        bottle.brand = updateForm.brand.data
-        bottle.material = updateForm.material.data.lower()
-        bottle.volume = updateForm.volume.data
-        db.session.commit()
+        if updateForm.validate_on_submit():
+            bottle.name = updateForm.name.data
+            bottle.brand = updateForm.brand.data
+            bottle.material = updateForm.material.data.lower()
+            bottle.volume = updateForm.volume.data
+            db.session.commit()
+        return redirect(url_for("bottles.index"))
+    else:
         return redirect(url_for("bottles.index"))
     return render_template("bottles/edit_bottle.html", form=updateForm, bottle=bottle)
 
@@ -75,7 +78,10 @@ def update_bottle(id):
 @bottles.route("/bottles/<int:id>/delete", methods=["GET", "POST"])
 @login_required
 def delete_bottle(id):
-    bottle = Bottle.query.get_or_404(id)
-    db.session.delete(bottle)
-    db.session.commit()
-    return redirect(url_for("bottles.index"))
+    if current_user.username == bottle.posted_by:
+        bottle = Bottle.query.get_or_404(id)
+        db.session.delete(bottle)
+        db.session.commit()
+        return redirect(url_for("bottles.index"))
+    else:
+        return redirect(url_for("bottles.index"))
