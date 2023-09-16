@@ -44,10 +44,10 @@ class Bottle(db.Model):
     brand = db.Column(db.String(64), nullable=False)
     material = db.Column(db.String(64), nullable=False)
     volume = db.Column(db.Integer)
+    posted_by = db.Column(db.String(64), nullable=True)
     reviews = db.relationship(
         "Review", cascade="all,delete", backref="bottle", lazy=True
     )
-    posted_by = db.Column(db.String(64))
 
 
 class Review(db.Model):

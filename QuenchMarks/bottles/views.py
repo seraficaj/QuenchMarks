@@ -32,7 +32,6 @@ def bottle_detail(id):
 @login_required
 def create_bottle():
     form = BottlePostForm()
-
     if form.validate_on_submit():
         print(form)
         new_bottle = Bottle(
@@ -40,6 +39,7 @@ def create_bottle():
             brand=form.brand.data,
             material=form.material.data,
             volume=form.volume.data,
+            posted_by=current_user.username,
         )
         db.session.add(new_bottle)
         db.session.commit()
